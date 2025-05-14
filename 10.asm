@@ -1,13 +1,13 @@
-	AREA PROG,CODE,READONLY
-START
-	MOV R0,#5
-	MOV R1,#7
-	ADD R2,R0,R1
-	SUB R3,R0,R1
-	SUB R4,R1,R0
-	MUL R5,R1,R0
-	ADC R6,R0,R1
-	RSB R7,R0,R1
-	BX LR
-	END
-	
+	area demo,code,readonly
+start
+;disabling
+	mrs r0,cpsr;11010011=D3
+	BIC r0,r0,#0x80;01010011=53
+	msr cpsr_c,r0;
+;enabling
+	mrs r0,cpsr;
+	ORR r0,r0,#0x80
+	msr cpsr_c,r0;
+;stopping
+	bx lr
+	end
